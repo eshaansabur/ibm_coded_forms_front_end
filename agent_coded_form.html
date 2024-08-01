@@ -1,0 +1,1138 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .loader {
+        width: 100%;
+        height: 120px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .jconfirm.jconfirm-light .jconfirm-box {
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        max-width: 80%;
+      }
+
+      /* @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        } */
+      h1 {
+        color: #f1592a;
+      }
+
+      section {
+        margin-left: 30px;
+        padding: 20px;
+      }
+
+      #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #customers td,
+      #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css"
+    />
+  </head>
+  <body>
+    <!--Form Header Section-->
+    <form id="agentForm" action="" method="POST" enctype="multipart/form-data">
+      <section>
+        <h1>Expression of interest – Education Agent</h1>
+        <p>
+          <span>Application must be accompanied by </span>
+          <input
+            type="checkbox"
+            id="Copy_of_business_registration"
+            name="copy_of_business_registration"
+            value="business_registration"
+          />
+          <label for="Copy_of_business_registration"
+            >Copy of business registration</label
+          >
+          <input
+            type="checkbox"
+            id="Evidence_of_EATC"
+            name="Evidence_of_EATC"
+            value="Evidence EATC"
+          />
+          <label for="Evidence_of_EATC"> Evidence of EATC</label>
+        </p>
+      </section>
+
+      <!--Agent Details-->
+      <section>
+        <h1>Agent Details</h1>
+        <table id="customers" border="1">
+          <tr>
+            <td>Company Legal Name</td>
+            <td>
+              <input
+                type="text"
+                id="company_legal_name"
+                name="company_legal_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Date of Registration(Company)</td>
+            <td>
+              <input
+                type="text"
+                id="date_of_company_registration"
+                name="date_of_company_registration"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Trading as</td>
+            <td>
+              <input type="text" id="trading_as" name="trading_as" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Business Address</td>
+            <td>
+              <input
+                type="text"
+                id="business_address"
+                name="business_address"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>ABN</td>
+            <td><input type="text" id="abn" name="abn" required /></td>
+          </tr>
+          <tr>
+            <td>Year of registration</td>
+            <td>
+              <input
+                type="text"
+                id="year_of_registration"
+                name="year_of_registration"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Owner's Name</td>
+            <td>
+              <input type="text" id="owners_name" name="owners_name" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Owner's Contact details</td>
+            <td>
+              <input
+                type="text"
+                id="owners_contact_details"
+                name="owners_contact_details"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Manager's Name</td>
+            <td>
+              <input
+                type="text"
+                id="manager_name"
+                name="manager_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Manager's Contact Details</td>
+            <td>
+              <input
+                type="text"
+                id="manager_contact_details"
+                name="manager_contact_details"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>
+              <input type="text" id="agent_phone" name="agent_phone" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Mobile No.</td>
+            <td>
+              <input
+                type="text"
+                id="agent_mobile_no"
+                name="agent_mobile_no"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Website</td>
+            <td>
+              <input
+                type="text"
+                id="agent_website"
+                name="agent_website"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Number of staffs</td>
+            <td>
+              <input
+                type="text"
+                id="number_of_staffs"
+                name="number_of_staffs"
+                required
+              />
+            </td>
+          </tr>
+        </table>
+        <h4>
+          <i
+            >Number of students referred to Australian education institutions
+            over the past year:</i
+          >
+        </h4>
+        <table id="customers" border="1">
+          <tr>
+            <td>High School</td>
+            <td>
+              <input
+                type="text"
+                id="num_students_australian_institutions"
+                name="num_students_australian_institutions"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>ELICOS:</td>
+            <td>
+              <input type="text" id="elicos_st" name="elicos_st" required />
+            </td>
+          </tr>
+          <tr>
+            <td>TAFE</td>
+            <td><input type="text" id="tafe_st" name="tafe_st" required /></td>
+          </tr>
+          <tr>
+            <td>Undergraduate</td>
+            <td>
+              <input
+                type="text"
+                id="undergraduate_st"
+                name="undergraduate_st"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Post Graduate</td>
+            <td>
+              <input
+                type="text"
+                id="postgraduate_st"
+                name="postgraduate_st"
+                required
+              />
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!--Please list any other institutes you represent in Australia-->
+      <section>
+        <table id="customers" border="1">
+          <tr>
+            <td>Please list any other institutes you represent in Australia</td>
+            <td>
+              <input
+                type="text"
+                id="represent_australia"
+                name="represent_australia"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Is your company involved in any other activities?</td>
+            <td>
+              <p>
+                <input
+                  type="radio"
+                  id="activity_yes"
+                  name="activities"
+                  value="yes"
+                  required
+                />
+                <label for="activity_yes">Yes</label>
+                <input
+                  type="radio"
+                  id="activity_no"
+                  name="activities"
+                  value="no"
+                  required
+                />
+                <label for="activity_no"> No</label>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Are you accredited to act as an education agent in your country?
+            </td>
+            <td>
+              <p>
+                <input
+                  type="radio"
+                  id="accredited_yes"
+                  name="education_agent_yes_or_no"
+                  value="yes"
+                  required
+                />
+                <label for="accredited_yes">Yes</label>
+                <input
+                  type="radio"
+                  id="accredited_no"
+                  name="education_agent_yes_or_no"
+                  value="no"
+                  required
+                />
+                <label for="accredited_no"> No</label>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>If Yes, please provide details:</td>
+            <td>
+              <input
+                type="text"
+                id="if_yes_provide_details"
+                name="if_yes_provide_details"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              What is the most suitable time of the year to conduct a marketing
+              trip to your region or a visit to your office to recruitstudents
+            </td>
+            <td>
+              <input
+                type="text"
+                id="suitable_time_student"
+                name="suitable_time_student"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Do you assist students while in Australia</td>
+            <td>
+              <p>
+                <input
+                  type="radio"
+                  id="assist_yes"
+                  name="assist"
+                  value="yes"
+                  required
+                />
+                <label for="assist_yes">Yes</label>
+                <input
+                  type="radio"
+                  id="assist_no"
+                  name="assist"
+                  value="no"
+                  required
+                />
+                <label for="assist_no"> No</label>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>If yes, please select</td>
+            <td>
+              <p>
+                <input
+                  type="radio"
+                  id="through_office_in_australia"
+                  name="assist_students_through"
+                  value="through_office_in_australia"
+                  required
+                />
+                <label for="through_office_in_australia"
+                  >through an office in Australia</label
+                >
+                <input
+                  type="radio"
+                  id="through_overseas"
+                  name="assist_students_through"
+                  value="through_overseas"
+                  required
+                />
+                <label for="assist_no">Through an overseas office</label>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- <section>
+        <p>
+          <span>If yes, please select</span>
+          <input
+            type="checkbox"
+            id="through_office_in_australia"
+            name="through_office_in_australia"
+            value="through_office_in_australia"
+          />
+          <label for="through_office_in_australia"
+            >through an office in Australia</label
+          >
+          <input
+            type="checkbox"
+            id="through_overseas"
+            name="through_overseas"
+            value="through_overseas"
+          />
+          <label for="assist_no">Through an overseas office</label>
+        </p>
+      </section> -->
+
+      <!--References-->
+      <section>
+        <h1>References</h1>
+        <h2>Referee 1</h2>
+        <table id="customers" border="1">
+          <tr>
+            <td>Company Name</td>
+            <td>
+              <input
+                type="text"
+                id="referee_company_name"
+                name="referee_company_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Contact Person</td>
+            <td>
+              <input
+                type="text"
+                id="referee_contact_person"
+                name="referee_contact_person"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>
+              <input
+                type="text"
+                id="referee_phone"
+                name="referee_phone"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Position</td>
+            <td>
+              <input
+                type="text"
+                id="referee_position"
+                name="referee_position"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>
+              <input
+                type="text"
+                id="referee_address"
+                name="referee_address"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input
+                type="email"
+                id="referee_email"
+                name="referee_email"
+                required
+              />
+            </td>
+          </tr>
+        </table>
+        <h2>Referee 2</h2>
+        <table id="customers" border="1">
+          <tr>
+            <td>Company Name</td>
+            <td>
+              <input
+                type="text"
+                id="referee_two_company_name"
+                name="referee_two_company_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Contact Person</td>
+            <td>
+              <input
+                type="text"
+                id="referee_two_contact_person"
+                name="referee_two_contact_person"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>
+              <input
+                type="text"
+                id="referee_two_phone"
+                name="referee_two_phone"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Position</td>
+            <td>
+              <input
+                type="text"
+                id="referee_two_position"
+                name="referee_two_position"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>
+              <input
+                type="text"
+                id="referee_two_address"
+                name="referee_two_address"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>
+              <input
+                type="text"
+                id="referee_two_email"
+                name="referee_two_email"
+                required
+              />
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!--Agent Bank Details-->
+      <section>
+        <h1>Agent Bank Details</h1>
+        <h4>
+          <i
+            >Please complete your bank account details below into which you wish
+            the commission payments to be made. If there is any change in Bank
+            Account details, please advise us in advance.
+          </i>
+        </h4>
+        <table id="customers" border="1">
+          <tr>
+            <td>Financial Institution Name</td>
+            <td>
+              <input
+                type="text"
+                id="financial_institution_name"
+                name="financial_institution_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Financial Institution Name</td>
+            <td>
+              <input
+                type="text"
+                id="financial_institution_name_two"
+                name="financial_institution_name_two"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Bank Address</td>
+            <td>
+              <input
+                type="text"
+                id="agent_bank_address"
+                name="agent_bank_address"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Name of Bank Account</td>
+            <td>
+              <input
+                type="text"
+                id="agent_bank_account_name"
+                name="agent_bank_account_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>SWIFT Code</td>
+            <td>
+              <input type="text" id="swift_code" name="swift_code" required />
+            </td>
+          </tr>
+          <tr>
+            <td>BSB Code</td>
+            <td>
+              <input type="text" id="bsb_code" name="bsb_code" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Account Number</td>
+            <td>
+              <input
+                type="text"
+                id="account_number_agent"
+                name="account_number_agent"
+                required
+              />
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!--Declaration-->
+      <section>
+        <h1>Declaration</h1>
+        <p>Please sign the declaration below:</p>
+        <ul>
+          <li>
+            I understand that Institute of Business and Management (Victoria) is
+            not under any obligation to accept my application to act as an agent
+            to recruit students on their behalf. understand that if my
+            application to become an agent of Institute of Business and
+            Management (Victoria) is successful, I will be required to enter
+            into and abide by a formal agency agreement.
+          </li>
+          <li>
+            I confirm that I have all the necessary registrations,
+            accreditations and permissions to act as an education agent in all
+            the territories which I have nominated, and understand that I must
+            notify the institute if any changes occur in the registration status
+            of my agency.
+          </li>
+          <li>
+            I have read, understand and agree to abide by the terms and
+            conditions of the institute’s privacy policy.
+          </li>
+          <li>
+            I consent to Institute of Business and Management (Victoria) to
+            contact any of the referees I have nominated.
+          </li>
+          <li>
+            I undertake that the above information provided in this application
+            is a true and accurate record as to the operation of the educational
+            agency I represent.
+          </li>
+        </ul>
+        <p>
+          By returning this application to Institute of Business and Management
+          (Victoria), I agree to abide by the terms and conditions in the
+          mentioned declaration.
+        </p>
+        <p>
+          Address & Contact for notices:<br />
+          60 Belfast Street, Broadmeadows, VIC, 3047.<br />
+          Phone: +61 3 94783163<br />
+          Email: info@ibm.vic.edu.au<br />
+          Website: https://ibm.vic.edu.au
+        </p>
+      </section>
+
+      <section>
+        <table id="customers" border="1">
+          <tr>
+            <td>Name of the officer</td>
+            <td>
+              <input
+                type="text"
+                id="name_of_the_officer"
+                name="name_of_the_officer"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Financial Institution Name</td>
+            <td>
+              <input
+                type="text"
+                id="financial_institution_name_two"
+                name="financial_institution_name_two"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Bank Address</td>
+            <td>
+              <input
+                type="text"
+                id="agent_bank_address"
+                name="agent_bank_address"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Name of Bank Account</td>
+            <td>
+              <input
+                type="text"
+                id="agent_bank_account_name"
+                name="agent_bank_account_name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Signature of Officer/ Agent:</td>
+            <td>
+              <input
+                type="file"
+                id="myFile"
+                name="filename"
+                max-size="200"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Date</td>
+            <td>
+              <input
+                type="date"
+                id="declaration_date"
+                name="declaration_date"
+                required
+              />
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section><button id="agentButton" type="submit">Submit</button></section>
+    </form>
+    <div id="loader" class="loader" style="text-align: center;">
+      <div
+        class="myProgress"
+        style="width: 30%; border: 1px solid black; margin: auto"
+      >
+        <div
+          class="myBar"
+          id="myBar"
+          style="
+            width: 1%;
+            background-color: #3498db;
+            height: 20px;
+            color: white;
+          "
+        >
+          0%
+        </div>
+      </div>
+      <div class="pl">
+        <div class="pl__text" style="color: red">
+          <h3>Thank you for submitting the form</h3>
+        </div>
+        <div style="color: blueviolet">
+          <h3>Please wait for a while…</h3>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#loader").hide();
+        })
+    </script>
+    <script type="text/javascript">
+      $("#agentForm").submit(function (e) {
+        e.preventDefault();
+        const maxSize = 30000;
+        $("#loader").show();
+        var formData = new FormData();
+        // alert("here");
+        var copy_of_business_registration = "";
+        if (
+          $('input[name="copy_of_business_registration"]').is(":checked") ==
+          true
+        ) {
+          copy_of_business_registration = document.querySelector(
+            'input[name="copy_of_business_registration"]:checked'
+          ).value;
+          //   alert(copy_of_business_registration)
+          formData.append(
+            "copy_of_business_registration",
+            copy_of_business_registration
+          );
+        }
+
+        var evidence_of_EATC = "";
+        if ($('input[name="Evidence_of_EATC"]').is(":checked") == true) {
+          evidence_of_EATC = $("#Evidence_of_EATC").val();
+          formData.append("evidence_of_EATC", evidence_of_EATC);
+        }
+
+        var company_legal_name = $("#company_legal_name").val();
+        formData.append("company_legal_name", company_legal_name);
+
+        var date_of_company_registration = $(
+          "#date_of_company_registration"
+        ).val();
+        formData.append(
+          "date_of_company_registration",
+          date_of_company_registration
+        );
+        var trading_as = $("#trading_as").val();
+        formData.append("trading_as", trading_as);
+
+        var business_address = $("#business_address").val();
+        formData.append("business_address", business_address);
+
+        var abn = $("#abn").val();
+        formData.append("abn", abn);
+
+        var year_of_registration = $("#year_of_registration").val();
+        formData.append("year_of_registration", year_of_registration);
+
+        var owners_name = $("#owners_name").val();
+        formData.append("owners_name", owners_name);
+
+        var owners_contact_details = $("#owners_contact_details").val();
+        formData.append("owners_contact_details", owners_contact_details);
+
+        var manager_name = $("#manager_name").val();
+        formData.append("manager_name", manager_name);
+
+        var manager_contact_details = $("#manager_contact_details").val();
+        formData.append("manager_contact_details", manager_contact_details);
+
+        var agent_phone = $("#agent_phone").val();
+        formData.append("agent_phone", agent_phone);
+
+        var agent_mobile_no = $("#agent_mobile_no").val();
+        formData.append("agent_mobile_no", agent_mobile_no);
+
+        var agent_website = $("#agent_website").val();
+        formData.append("agent_website", agent_website);
+
+        var number_of_staffs = $("#number_of_staffs").val();
+        formData.append("number_of_staffs", number_of_staffs);
+
+        var num_students_australian_institutions = $(
+          "#num_students_australian_institutions"
+        ).val();
+        formData.append(
+          "num_students_australian_institutions",
+          num_students_australian_institutions
+        );
+
+        var elicos_st = $("#elicos_st").val();
+        formData.append("elicos_st", elicos_st);
+
+        var tafe_st = $("#tafe_st").val();
+        formData.append("tafe_st", tafe_st);
+
+        var undergraduate_st = $("#undergraduate_st").val();
+        formData.append("undergraduate_st", undergraduate_st);
+
+        var postgraduate_st = $("#postgraduate_st").val();
+        formData.append("postgraduate_st", postgraduate_st);
+
+        var represent_australia = $("#represent_australia").val();
+        formData.append("represent_australia", represent_australia);
+
+        if ($('input[name="activities"]').is(":checked") == true) {
+          var activities = document.querySelector(
+            'input[name="activities"]:checked'
+          ).value;
+          //   alert(activities)
+          formData.append("activities", activities);
+        }
+
+        if (
+          $('input[name="education_agent_yes_or_no"]').is(":checked") == true
+        ) {
+          var education_agent_yes_or_no = document.querySelector(
+            'input[name="education_agent_yes_or_no"]:checked'
+          ).value;
+          //   alert(education_agent_yes_or_no)
+          formData.append(
+            "education_agent_yes_or_no",
+            education_agent_yes_or_no
+          );
+        }
+
+        var if_yes_provide_details = "";
+        if (education_agent_yes_or_no == "yes") {
+          if ($("#if_yes_provide_details").val() != "") {
+            if_yes_provide_details = $("#if_yes_provide_details").val();
+            formData.append("if_yes_provide_details", if_yes_provide_details);
+          }
+        }
+
+        var suitable_time_student = $("#suitable_time_student").val();
+        formData.append("suitable_time_student", suitable_time_student);
+
+        if ($('input[name="assist"]').is(":checked") == true) {
+          var assist = document.querySelector(
+            'input[name="assist"]:checked'
+          ).value;
+          //   alert(assist);
+          formData.append("assist", assist);
+        }
+        var assist_students_through = "";
+        if (assist == "yes") {
+          if (
+            $('input[name="assist_students_through"]').is(":checked") == true
+          ) {
+            var assist_students_through = document.querySelector(
+              'input[name="assist_students_through"]:checked'
+            ).value;
+            formData.append("assist_students_through", assist_students_through);
+          }
+        }
+
+        var referee_company_name = $("#referee_company_name").val();
+        formData.append("referee_company_name", referee_company_name);
+
+        var referee_contact_person = $("#referee_contact_person").val();
+        formData.append("referee_contact_person", referee_contact_person);
+
+        var referee_phone = $("#referee_phone").val();
+        formData.append("referee_phone", referee_phone);
+
+        var referee_position = $("#referee_position").val();
+        formData.append("referee_position", referee_position);
+
+        var referee_address = $("#referee_address").val();
+        formData.append("referee_address", referee_address);
+
+        var referee_email = $("#referee_email").val();
+        formData.append("referee_email", referee_email);
+
+        /////////////////////////
+
+        var referee_two_company_name = $("#referee_two_company_name").val();
+        formData.append("referee_two_company_name", referee_two_company_name);
+
+        var referee_two_contact_person = $("#referee_two_contact_person").val();
+        formData.append(
+          "referee_two_contact_person",
+          referee_two_contact_person
+        );
+
+        var referee_two_phone = $("#referee_two_phone").val();
+        formData.append("referee_two_phone", referee_two_phone);
+
+        var referee_two_position = $("#referee_two_position").val();
+        formData.append("referee_two_position", referee_two_position);
+
+        var referee_two_address = $("#referee_two_address").val();
+        formData.append("referee_two_address", referee_two_address);
+
+        var referee_two_email = $("#referee_two_email").val();
+        formData.append("referee_two_email", referee_two_email);
+
+        // Agent Bank Details
+
+        var financial_institution_name = $("#financial_institution_name").val();
+        formData.append(
+          "financial_institution_name",
+          financial_institution_name
+        );
+
+        var agent_bank_address = $("#agent_bank_address").val();
+        formData.append("agent_bank_address", agent_bank_address);
+
+        var agent_bank_account_name = $("#agent_bank_account_name").val();
+        formData.append("agent_bank_account_name", agent_bank_account_name);
+
+        var swift_code = $("#swift_code").val();
+        formData.append("swift_code", swift_code);
+
+        var bsb_code = $("#bsb_code").val();
+        formData.append("bsb_code", bsb_code);
+
+        var account_number_agent = $("#account_number_agent").val();
+        formData.append("account_number_agent", account_number_agent);
+
+        // Declaration
+        var name_of_the_officer = $("#name_of_the_officer").val();
+        formData.append("name_of_the_officer", name_of_the_officer);
+
+        var financial_institution_name_two = $(
+          "#financial_institution_name_two"
+        ).val();
+        formData.append(
+          "financial_institution_name_two",
+          financial_institution_name_two
+        );
+
+        var agent_bank_address = $("#agent_bank_address").val();
+        formData.append("agent_bank_address", agent_bank_address);
+
+        var agent_bank_account_name = $("#agent_bank_account_name").val();
+        formData.append("agent_bank_account_name", agent_bank_account_name);
+
+        var signature = $("#myFile")[0].files[0];
+        if (signature.size < maxSize) {
+          formData.append("signature", signature);
+
+          var declaration_date = $("#declaration_date").val();
+          // alert(declaration_date);
+          formData.append("declaration_date", declaration_date);
+          var button = document.getElementById("agentButton");
+          button.setAttribute("disabled", "");
+          var elem = $("#myBar");
+          var width = 1;
+
+          function simulateProgress() {
+            if (width >= 100) {
+              clearInterval(progressInterval);
+            } else {
+              width++;
+              elem.css("width", width + "%");
+              elem.text(width + "%");
+            }
+          }
+          var progressInterval = setInterval(simulateProgress, 130);
+          $("#loader").show();
+          $("#agentForm").hide();
+          $.ajax({
+            type: "POST",
+            url: "https://backend.ibm.vic.edu.au/api/agent-form-pdf-merge",
+            data: formData,
+            processData: false, // Important: Prevent jQuery from processing the data
+            contentType: false, // Important: Prevent jQuery from setting the content type
+            headers: {
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include the CSRF token
+            },
+            contentType: false,
+            success: function (data) {
+              clearInterval(progressInterval);
+              progressBar.css("width", "100%");
+
+              // window.location.href = "https://ibm.quadque.tech/";
+            },
+          }).then((res) => {
+            $("#loader").hide();
+            $.alert({
+              title: "Success!",
+              content: "Submitted successfully",
+              buttons: {
+                ok: {
+                  text: "OK",
+                  action: function () {
+                    window.location.href = "https://ibm.quadque.tech/"; // Replace with your desired URL
+                  },
+                },
+              },
+            });
+          });
+        } else {
+          $("#loader").hide();
+          alert("File size must be less than 3 Mb");
+        }
+      });
+    </script>
+  </body>

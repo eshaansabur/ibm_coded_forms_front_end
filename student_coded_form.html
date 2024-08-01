@@ -1,0 +1,1976 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Student Enrollment Form</title>
+    <style>
+        .loader {
+            border: none;
+            width: 100%;
+            animation: none;
+            height: 120px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+    .jconfirm.jconfirm-light .jconfirm-box {
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        max-width: 80%;
+      }
+
+        h1 {
+            color: #f1592a;
+        }
+
+        section {
+            margin-left: 30px;
+            padding: 20px;
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        input[type=text],
+        input[type=email],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css"
+    />
+</head>
+
+<body>
+    <!--Form Header Section-->
+    <form action id="form" method="post" enctype="multipart/form-data">
+    <section>
+        <h1>Application/Enrolment Form</h1>
+        <h4>1. Complete all section using BLOCK LETTERS</h4>
+        <h4>2. Attach supporting documents, including certified copies of
+            your passport and Academic Documents</h4>
+    </section>
+    <!--Course Selection-->
+    <!--<form action id="form" method="post" enctype="multipart/form-data">-->
+        <section>
+            <h1>Course Selection</h1>
+            <table id="customers">
+                <tr>
+                    <th>Please Tick</th>
+                    <th>Qualification Code</th>
+                    <th>CRICOS Code</th>
+                    <th>Qualification Name</th>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="general-english" name="course" value="general-english" required></td>
+                    <td></td>
+                    <td>0101439</td>
+                    <td>GENERAL ENGLISH (Elementary, Pre-intermediate,
+                        Intermediate, Upper intermediate)</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="diploma-business" name="course" value="diploma-business" required></td>
+                    <td>BSB50120</td>
+                    <td>105493A</td>
+                    <td>Diploma of Business</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="advanced-diploma-business" name="course"
+                            value="advanced-diploma-business" required>
+                    </td>
+                    <td>BSB60120</td>
+                    <td>105494M</td>
+                    <td>Advanced Diploma of Business</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="graduate-diploma-management" name="course"
+                            value="graduate-diploma-management" required></td>
+                    <td>BSB80120</td>
+                    <td>106515C</td>
+                    <td>Graduate Diploma of Management (Learning)</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="certificate-three-carpentry" name="course"
+                            value="certificate-three-carpentry" required></td>
+                    <td>CPC30220</td>
+                    <td>107988F</td>
+                    <td>Certificate III in Carpentry</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="certificate-three-cookery" name="course"
+                            value="certificate-three-cookery" required>
+                    </td>
+                    <td>SIT30821</td>
+                    <td>110591A</td>
+                    <td>Certificate III in Commercial cookery</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="certificate-four-kitchen" name="course" value="certificate-four-kitchen"
+                            required>
+                    </td>
+                    <td>SIT40521</td>
+                    <td>110595H</td>
+                    <td>Certificate IV in Kitchen Management</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" id="diploma-hospital-management" name="course"
+                            value="diploma-hospital-management" required></td>
+                    <td>SIT50416</td>
+                    <td>110662B</td>
+                    <td>Diploma of Hospitality Management</td>
+                </tr>
+            </table>
+            <p>
+                <span>Do you need Airport pickup?</span>
+                <input type="radio" id="airport-pickup-yes" name="airport-pickup" value="airport-pickup-yes" required>
+                <label for="airport-pickup-yes"> Yes</label>
+                <input type="radio" id="airport-pickup-no" name="airport-pickup" value="airport-pickup-no" required>
+                <label for="airport-pickup-no"> No</label>
+            </p>
+            <h4><i>Note: for updated fees and charges, refunds and
+                    cancellations
+                    please refer to our student handbook,
+                    website or contact to our reception at Building D, 60
+                    Belfast Street, Broadmeadows VIC 3047</i></h4>
+        </section>
+
+        <!--Personal Details-->
+
+        <section>
+            <h1>Personal Details</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Title</td>
+                    <td>
+                        <input type="radio" id="mister" name="title" value="mister" required>
+                        <label for="mister"> Mr.</label>
+                        <input type="radio" id="misses" name="title" value="misses" required>
+                        <label for="misses"> Mrs.</label>
+                        <input type="radio" id="miss" name="title" value="miss" required>
+                        <label for="miss"> Ms. </label>
+                        <input type="radio" id="miss2" name="title" value="miss2" required>
+                        <label for="miss2"> Miss </label>
+                        <input type="radio" id="other" name="title" value="other" required>
+                        <label for="other"> Other </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male"> Male</label>
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female"> Female</label>
+                        <input type="radio" id="gender_other" name="gender" value="gender_other" required>
+                        <label for="gender_other"> Other </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Family Name</td>
+                    <td><input type="text" id="family-name" name="family-name" required /></td>
+                </tr>
+                <tr>
+                    <td>Given Name</td>
+                    <td><input type="text" id="given-name" name="given-name" required></td>
+                </tr>
+            </table>
+            <h4><i>Please write the name that you used when you applied for
+                    your Unique Student Identifier (USI),
+                    including any middle names. If you do not yet have a USI
+                    and want us to apply for a USI on your
+                    behalf, you must write your name, including any middle
+                    names, exactly as written in the identity
+                    document you choose to use for this purpose. See section
+                    on the USI at the end of this form for a
+                    detailed explanation.</i></h4>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Place and country of Birth</td>
+                    <td>
+                        <input type="text" id="place-birth" name="place-birth" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>
+                        <input type="date" id="date-birth" name="date-birth" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nationality</td>
+                    <td><input type="text" id="nationality" name="nationality" required></td>
+                </tr>
+                <tr>
+                    <td>Passport No.</td>
+                    <td><input type="text" id="passportno" name="passportno" required></td>
+                </tr>
+                <tr>
+                    <td>Expiry Date</td>
+                    <td><input type="text" id="passport-expiry-date" name="passport-expiry-date" required></td>
+                </tr>
+                <tr>
+                    <td>Visa Type</td>
+                    <td><input type="text" id="visa-type" name="visa-type" required><br></td>
+                </tr>
+                <tr>
+                    <td>Visa Subclass</td>
+                    <td><input type="text" id="visa-subclass" name="visa-subclass" required></td>
+                </tr>
+                <tr>
+                    <td>Visa Number</td>
+                    <td><input type="text" id="visa-number" name="visa-number" required></td>
+                </tr>
+                <tr>
+                    <td>Visa Expiry Date</td>
+                    <td><input type="text" id="visa-expiry-date" name="visa-expiry-date" required></td>
+                </tr>
+            </table>
+        </section>
+
+        <!--Overseas Health Cover-->
+        <section>
+            <h1>Overseas Health Cover</h1>
+            <p><span>Do you have Overseas Health Cover (OSHC)?</span>
+                <select name="oshc-cover" id="oshc-cover" required>
+                    <option value="oshc-cover-yes">Yes</option>
+                    <option value="oshc-cover-no">No</option>
+                </select>
+            </p>
+            <p>
+                <label for="oshc-cover-provider">If Yes, OSHC
+                    Provider:</label>
+                <input type="text" id="oshc-cover-provider" name="oshc-cover-provider"><br>
+            <p><span>If No, I require</span>
+                <select name="oshc-cover-if-no" id="oshc-cover-if-no" required>
+                    <option value="single">Single
+                        Cover</option>
+                    <option value="family">Family
+                        Cover</option>
+                </select>
+            </p>
+            <label for="oshc-cover-family-member-name">Name(s) of the
+                family member(s)</label>
+            <input type="text" id="oshc-cover-family-member-name" name="oshc-cover-family-member-name" required><br>
+            <label for="oshc-cover-date-birth">Date of Birth:
+            </label>
+            <input type="date" id="oshc-cover-date-birth" name="oshc-cover-date-birth" required><br>
+            <p><span>Gender:</span>
+                <select name="oshc-cover-gender" id="oshc-cover-gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </p>
+            <h4>Are you currently studying in Australia?</h4>
+            <select name="oshc-cover-study-australia" id="oshc-cover-study-australia" required>
+                <option value="oshc-cover-study-australia-yes">Yes</option>
+                <option value="oshc-cover-study-australia-no">No</option>
+            </select>
+            <label for="oshc-cover-name-institute">If Yes, Name of
+                institute</label>
+            <input type="text" id="oshc-cover-name-institute" name="oshc-cover-name-institute" required><br>
+            <h4>Are you Transferring from another education provider in
+                Australia?</h4>
+            <select name="oshc-cover-transferring-education" id="oshc-cover-transferring-education" required>
+                <option value="oshc-cover-transferring-education-yes">Yes</option>
+                <option value="oshc-cover-transferring-education-no">No</option>
+            </select>
+            </p>
+        </section>
+
+        <!--Unique Student Identifier-->
+        <section>
+            <h1>Unique Student Identifier</h1>
+            <h4>Do you have a Unique Student Identifier (USI)?</h4>
+            <select name="usi-cover" id="usi-cover" required>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <p>
+                <label for="usi-specify">If YES, please specify your
+                    USI</label>
+                <input type="text" id="usi-specify" name="usi-specify"><br>
+            <h4>USI verified by Institute of Business and Management
+                (Victoria):</h4>
+            <label for="usi-staff-name">Staff Name</label>
+            <input type="text" id="usi-staff-name" name="usi-staff-name" required><br>
+            <label for="usi-staff-signature">Select Signature</label>
+            <input type="file" id="usi_staff_signature" name="usi_staff_signature" accept="image/*" required><br>
+            <label for="usi-staff-date">Date</label>
+            <input type="text" id="usi-staff-date" name="usi-staff-date" required><br>
+            </p>
+            <h4>
+                <i>From 1 January 2015, we can be prevented from issuing you
+                    with a nationally recognised VET
+                    qualification or statement of attainment when you
+                    complete your course if you do not have a Unique
+                    Student Identifier (USI). In addition, we are required
+                    to include your USI in the data we submit to
+                    NCVER. If you have not yet obtained a USI you can apply
+                    for it directly at
+                    http://www.usi.gov.au/create-your-USI/ on computer or
+                    mobile device. Please note that if you would
+                    like to specify your gender as ‘other’ you will need to
+                    contact the USI Office for assistance</i>
+            </h4>
+
+        </section>
+
+        <!--Contact Details-->
+        <section>
+            <h1>Contact Details</h1>
+            <h1>Residential Address (Home Country)</h1>
+            <p>
+                <label for="contact-home-address">Address:</label>
+                <input type="text" id="contact-home-address" name="contact-home-address" required><br>
+                <label for="contact-home-country">Country:</label>
+                <input type="text" id="contact-home-country" name="contact-home-country" required><br>
+                <label for="contact-home-phone">Phone:</label>
+                <input type="text" id="contact-home-phone" name="contact-home-phone" required><br>
+                <label for="contact-home-email">Email:</label>
+                <input type="email" id="contact-home-email" name="contact-home-email" required><br>
+            </p>
+            <h1>Residential Address (Australia)</h1>
+            <p>
+                <label for="contact-australia-building">Building/Property
+                    Name</label>
+                <input type="text" id="contact-australia-building" name="contact-australia-building"><br required>
+                <label for="contact-australia-flat">Flat/Unit
+                    Details</label>
+                <input type="text" id="contact-australia-flat" name="contact-australia-flat" required><br>
+
+                <label for="contact-australia-street-no">Street No</label>
+                <input type="text" id="contact-australia-street-no" name="contact-australia-street-no" required><br>
+
+                <label for="contact-australia-street-name">Street
+                    Name</label>
+                <input type="text" id="contact-australia-street-name" name="contact-australia-street-name" required><br>
+
+                <label for="contact-australia-suburb">Suburb</label>
+                <input type="text" id="contact-australia-suburb" name="contact-australia-suburb" required><br>
+
+                <label for="contact-australia-state">State /
+                    territory</label>
+                <input type="text" id="contact-australia-state" name="contact-australia-state" required><br>
+
+                <label for="contact-australia-postcode">Postcode</label>
+                <input type="text" id="contact-australia-postcode" name="contact-australia-postcode" required><br>
+
+                <label for="contact-australia-mobile">Mobile</label>
+                <input type="text" id="contact-australia-mobile" name="contact-australia-mobile" required><br>
+                <label for="contact-australia-email">Email:</label>
+                <input type="email" id="contact-australia-email" name="contact-australia-email" required><br>
+            </p>
+            <h1>Postal Address (if different from residential Address)</h1>
+            <p>
+                <label for="postal-address-building">Building/Property
+                    Name</label>
+                <input type="text" id="postal-address-building" name="postal-address-building" required><br>
+                <label for="postal-address-flat">Flat/Unit Details</label>
+                <input type="text" id="postal-address-flat" name="postal-address-flat" required><br>
+
+                <label for="postal-address-street-no">Street No</label>
+                <input type="text" id="postal-address-street-no" name="postal-address-street-no" required><br>
+
+                <label for="postal-address-street-name">Street Name</label>
+                <input type="text" id="postal-address-street-name" name="postal-address-street-name" required><br>
+
+                <label for="postal-address-suburb">Suburb</label>
+                <input type="text" id="postal-address-suburb" name="postal-address-suburb" required><br>
+
+                <label for="postal-address-state">State / territory</label>
+                <input type="text" id="postal-address-state" name="postal-address-state" required><br>
+
+                <label for="postal-address-postcode">Postcode</label>
+                <input type="text" id="postal-address-postcode" name="postal-address-postcode" required><br>
+
+                <label for="postal-address-delivery-box">PO Box or roadside
+                    delivery box:</label>
+                <input type="text" id="postal-address-delivery-box" name="postal-address-delivery-box" required><br>
+            </p>
+            <h4>Preferred Contact Method</h4>
+            <input type="radio" id="preferred-contact-method-mail" name="preferred-contact-method" value="email"
+                required>
+            <label for="preferred-contact-method-mail">Email</label>
+            <input type="radio" id="preferred-contact-method-phone" name="preferred-contact-method" value="phone"
+                required>
+            <label for="preferred-contact-method-phone"> Phone</label>
+            <h1>Emergency Contact in Australia or Home Country</h1>
+            <p>
+                <label for="emergency-contact-name">Name</label>
+                <input type="text" id="emergency-contact-name" name="emergency-contact-name" required><br>
+
+                <label for="emergency-contact-phone">Phone</label>
+                <input type="text" id="emergency-contact-phone" name="emergency-contact-phone" required><br>
+
+                <label for="emergency-contact-relationship">Relationship</label>
+                <input type="text" id="emergency-contact-relationship" name="emergency-contact-relationship"
+                    required><br>
+            </p>
+        </section>
+
+        <!--English Language Proficiency-->
+        <section>
+            <h1>English Language Proficiency</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Assessment Type</td>
+                    <td>
+                        <input type="radio" id="ielts" name="assessment_type" value="ielts" required>
+                        <label for="ielts"> IELTS</label>
+                        <input type="radio" id="pte" name="assessment_type" value="pte">
+                        <label for="pte"> PTE</label>
+                        <input type="radio" id="toefl" name="assessment_type" value="toefl" required>
+                        <label for="toefl"> TOEFL</label>
+                        <input type="radio" id="others" name="assessment_type" value="others" required>
+                        <label for="others"> Others </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Score Achieved</td>
+                    <td>
+                        <input type="text" id="english-score-achieved" name="english-score-achieved" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td><input type="text" id="english-score-date" name="english-score-date" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="english-not-required" name="english-not-required"
+                            value="english-not-required">
+                        <label for="english-toefl"> Not Required. I am from
+                            Level I country. (You will be required to
+                            undertake Placement Assessment if you are not
+                            from the list of exempted countries. Refer
+                            Entry requirement policy)</label>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!--Previous Qualification Achieved-->
+        <section>
+            <h1>Previous Qualification Achieved</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Have you successfully completed any of the following
+                        qualifications in Australia or hold any
+                        recognized overseas qualification?</td>
+                    <td>
+                        <input type="radio" id="yes" name="yes-or-no" value="yes" required>
+                        <label for="yes"> Yes</label>
+                        <input type="radio" id="no" name="yes-or-no" value="no" required>
+                        <label for="no"> No</label>
+
+                    </td>
+                </tr>
+                <!-- <div id="previous_qual_list"> -->
+                    <tr id="previous_qual_list1">
+                    <td>
+                        <input type="checkbox" id="bachelors" name="prev_qual_bachelors" value="bachelors">
+                        <label for="bachelors">
+                            Bachelors or Above</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="degree" name="prev_qual_degree" value="degree">
+                        <label for="degree">
+                            Degree</label>
+                    </td>
+                </tr>
+                <tr id="previous_qual_list2">
+                    <td>
+                        <input type="checkbox" id="advanceOrdiploma" name="prev_qual_advanceOrdiploma"
+                            value="Advance_or_Diploma">
+                        <label for="diploma">
+                            Advance or Diploma</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="diploma" name="prev_qual_diploma" value="diploma">
+                        <label for="diploma">Diploma</label>
+                    </td>
+                </tr>
+                <tr id="previous_qual_list3">
+                    <td>
+                        <input type="checkbox" id="year-twelve" name="prev_qual_year_twelve" value="year_twelve">
+                        <label for="year-twelve">Year
+                            12</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="certification-four" name="prev_qual_certification_four"
+                            value="certification_four">
+                        <label for="certification-four">Certification
+                            IV</label>
+                    </td>
+                </tr>
+                <tr id="previous_qual_list4">
+                    <td>
+                        <input type="checkbox" id="certification-three" name="prev_qual_certification_three"
+                            value="certification_three">
+                        <label for="certification-three">Certification
+                            III</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="certification-two" name="prev_qual_certification_two"
+                            value="certification_two">
+                        <label for="certification-two">Certification
+                            II</label>
+                    </td>
+                </tr>
+                <!-- </div> -->
+                
+                <tr>
+                    <td>In case of overseas qualification, has the
+                        qualification been skill assessed in Australia?</td>
+                    <td>
+                        <p>
+                            <input type="radio" id="assessedOrNot" name="assessedOrNot" value="yes" required>
+                            <label for="assess-yes">Yes</label>
+                            <input type="radio" id="assessedOrNot" name="assessedOrNot" value="no" required>
+                            <label for="assess-no">No</label>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!--Most recent or current Qualifications-->
+        <section>
+            <h1>Most recent or current Qualifications</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Name of Qualification:</td>
+                    <td><input type="text" id="most-recent-qualification" name="most-recent-qualification" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>School/ Institution:</td>
+                    <td><input type="text" id="most-recent-school" name="most-recent-school" required></td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td><input type="text" id="most-recent-country" name="most-recent-country" required></td>
+                </tr>
+                <tr>
+                    <td>Year was/to be completed:</td>
+                    <td><input type="text" id="most-recent-year-complete" name="most-recent-year-complete" required>
+                    </td>
+                </tr>
+            </table>
+            <h4><i>Attach documentation including certified copies of all
+                    academic records. A certified copy is a
+                    photocopy stamped and signed by a public notary.
+                    Academic records not in English must also be
+                    accompanied by a certified translated copy</i></h4>
+        </section>
+
+        <!--Recognition of Prior Learning/ Credit Transfer-->
+        <section>
+            <h1>Recognition of Prior Learning/ Credit Transfer</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Do you want to apply for RPL/Credit Transfer</td>
+                    <td>
+                        <input type="radio" id="rpl-transfer-yes" name="rpl-transfer" value="yes" required>
+                        <label for="rpl-transfer-yes">Yes</label>
+                        <input type="radio" id="rpl-transfer-no" name="rpl-transfer" value="no" required>
+                        <label for="rpl-transfer-no">No</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        If yes, you must attach certified translated
+                        (English) copies of your supporting documents (e.g.
+                        employment letter, position descriptions, Statement
+                        of Attainment, etc.). so that Institute of
+                        Business and Management (Victoria) can assess your
+                        eligibility for RPL/Credit Transfer
+                        <br>Complete RPL/CT form available at our reception
+                        and website.
+                    </td>
+                    <td>
+                        <input type="file" id="student_important_files" name="student_important_files" accept="pdf/*">
+                    </td>
+                </tr>
+
+            </table>
+        </section>
+
+        <!--Reason for Study Which of the following best describes your reason for undertaking this course?-->
+        <section>
+            <h1>Reason for Study Which of the following best describes your
+                reason for undertaking this course?</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>
+                        <input type="checkbox" id="get-a-job" name="reasonsOfTakingCourse_get_a_job"
+                            value="To get a job">
+                        <label for="get-a-job">To get a job</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="get-a-better-job" name="reasonsOfTakingCourse_better_promotion"
+                            value="To get a better job or promotion">
+                        <label for="get-a-better-job">To get a better job or
+                            promotion</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="part-time-job" name="reasonsOfTakingCourse_part_time_job"
+                            value="Required as part of my job">
+                        <label for="part-time-job">Required as part of my
+                            job</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="career-in-the-new-field"
+                            name="reasonsOfTakingCourse_career_in_new_field"
+                            value="To start a new career in a different field">
+                        <label for="career-in-the-new-field">To start a new
+                            career in a different field</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="start-a-business" name="reasonsOfTakingCourse_start_a_business"
+                            value="To start my own business">
+                        <label for="start-a-business">To start my own
+                            business</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="gain-new-skill" name="reasonsOfTakingCourse_gain_new_skill"
+                            value="To gain new skill">
+                        <label for="gain-new-skill">To gain new
+                            skill</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="gain-knowledge" name="reasonsOfTakingCourse_gain_knowledge"
+                            value="To gain knowledge in another course">
+                        <label for="gain-knowledge">To gain knowledge in
+                            another course</label>
+                    </td>
+                    <td>
+                        Others: <input type="text" id="other-reason-to-study" value="others"
+                            name="reasonsOfTakingCourse_personal_interest">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="personal-interest" name="reasonsOfTakingCourse_personal_interest"
+                            value="For personal interest or self-development">
+                        <label for="personal-interest">For personal interest
+                            or self-development</label>
+                    </td>
+
+                </tr>
+            </table>
+        </section>
+
+        <!--Special Needs-->
+        <section>
+            <h1>Special Needs</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>Do you need any special support such as Language,
+                        Literacy and Numeracy</td>
+                    <td>
+                        <p>
+                            <input type="radio" id="special-support-yes" name="special-support" value="yes" required>
+                            <label for="special-support-yes">Yes</label>
+                            <input type="radio" id="special-support-no" name="special-support" value="no" required>
+                            <label for="special-support-no">No</label>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Do you suffer from any physical / mental disability
+                        that may affect your participation in the
+                        course?</td>
+                    <td>
+                        <p>
+                            <input type="radio" id="disability-yes" name="disability" value="yes" required>
+                            <label for="disability-yes">Yes</label>
+                            <input type="radio" id="disability-no" name="disability" value="no" required>
+                            <label for="disability-no">No</label>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Any Other Special Need?</td>
+                    <td>
+                        <p>
+                            <input type="radio" id="other-special-yes" name="other-special" value="yes" required>
+                            <label for="other-special-yes">Yes</label>
+                            <input type="radio" id="other-special-no" name="other-special" value="no" required>
+                            <label for="other-special-no">No</label>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <h4><i>If yes, direct it to our administration Department who
+                    will assist you on the support option
+                    available to you</i></h4>
+        </section>
+
+        <!--Employment-->
+        <section>
+            <h1>Employment</h1>
+            <h4>Which of the following best describes your current
+                employment status?</h4>
+            <p>
+                <input type="radio" id="full-time-employee" name="employment" value="full-time-employee" required>
+                <label for="full-time-employee">Full-time Employee</label>
+
+                <input type="radio" id="part-time-employee" name="employment" value="part-time-employee" required>
+                <label for="part-time-employee">Part-time Employee</label>
+
+                <input type="radio" id="unemployed-full" name="employment" value="Unemployed- seeking full time work"
+                    required>
+                <label for="unemployed-full">Unemployed- seeking full time
+                    work</label>
+
+                <input type="radio" id="unemployed-part" name="employment" value="Unemployed- seeking part time work"
+                    required>
+                <label for="unemployed-part">Unemployed- seeking part time
+                    work</label>
+
+                <input type="radio" id="self-employed" name="employment" value="Self-employed, not employing others"
+                    required>
+                <label for="self-employed">Self-employed, not employing
+                    others</label>
+
+                <input type="radio" id="not-employed" name="employment" value="Not employed, not looking for work"
+                    required>
+                <label for="not-employed">Not employed, not looking for
+                    work</label>
+
+                <input type="radio" id="employeed-unpaid" name="employment"
+                    value="Employed, unpaid worker in a family business" required>
+                <label for="employeed-unpaid">Employed, unpaid worker in a
+                    family business</label>
+
+                <input type="radio" id="employer" name="employment" value="Employer" required>
+                <label for="employer">Employer</label>
+            </p>
+        </section>
+
+        <!--Privacy Notice-->
+        <section>
+            <h1>Privacy Notice</h1>
+            <p>Under the Data Provision Requirements 2012, Institute of
+                Business and Management (Victoria) is required
+                to collect personal information
+                about you and to disclose that personal information to the
+                National Centre for Vocational Education
+                Research Ltd (NCVER).</p>
+            <p>Your personal information (including the personal information
+                contained on this enrolment form and your
+                training activity data) may be used or disclosed by
+                institute for statistical, regulatory and research
+                purposes. Institute of Business and Management (Victoria)
+                may disclose your personal information for these purposes to
+                third parties, including:</p>
+            <ul>
+                <li>Employer – if you are enrolled in training paid by your
+                    employer;</li>
+                <li>Commonwealth and State or Territory government
+                    departments and authorised agencies;</li>
+                <li>NCVER;</li>
+                <li>Organisations conducting student surveys; and</li>
+                <li>Researchers.</li>
+                <li>Personal information disclosed to NCVER may be used or
+                    disclosed for the following purposes:</li>
+                <li>Issuing a VET Statement of Attainment or VET
+                    Qualification, and populating Authenticated VET
+                    Transcripts;</li>
+                <li>facilitating statistics and research relating to
+                    education, including surveys;</li>
+                <li>understanding how the VET market operates, for policy,
+                    workforce planning and consumer information;
+                    and</li>
+                <li>administering VET, including program administration,
+                    regulation, monitoring and evaluation.</li>
+            </ul>
+            <p>You may receive an NCVER student survey which may be
+                administered by an NCVER employee, agent or
+                third-party contractor. You may opt out of the survey at the
+                time of being contacted.
+                NCVER will collect, hold, use and disclose your personal
+                information in accordance with the Privacy Act
+                1988 (Cth), the VET Data Policy and all NCVER policies and
+                protocols (including those published on
+                NCVER’s website at www.ncver.edu.au).</p>
+        </section>
+
+        <!--Student Declaration and consent:-->
+        <section>
+            <h1>Student Declaration and consent:</h1>
+            <ul>
+                <li>I declare that the information I have provided to the
+                    best of my knowledge is true and correct.</li>
+                <li>I consent to the collection, use and disclosure of my
+                    personal information in accordance with the
+                    Privacy Notice above.</li>
+                <li>I have read and understood Institute of Business and
+                    Management (Victoria)’s relevant policies and
+                    procedures and the terms and conditions of enrolment,
+                    fee payment, fee refunds, deferment,
+                    suspension or cancellation. I also understand that all
+                    pre-enrolment information can be requested by
+                    emailing info@ibm.vic.edu.au or calling 03 9478
+                    3163.</li>
+                <li>confirm that I am fully aware of the fees, cancellation
+                    and refund conditions and I agree to be a
+                    student at IBM (Victoria). I acknowledge that the
+                    provision of incorrect information or
+                    documentation or the withholding of information or
+                    documentation relating to my application may
+                    result in the cancellation of my enrolment.</li>
+            </ul>
+            <h3>Use of personal information:</h3>
+            <p>I understand that Institute of Business and Management
+                (Victoria) may distribute my personal details as
+                indicated in the statement:<br>
+                “Information is collected on this form and during your
+                enrolment in order to meet our obligations under
+                the ESOS Act and the National Code 2018; to ensure student
+                compliance with the conditions of their visas
+                and their obligations under Australian immigration laws
+                generally. The authority to collect this
+                information is contained in the Education Services for
+                Overseas Students Act 2000, the Education
+                Services for Overseas Students Regulations 2001 and the
+                National Code of Practice for Registration
+                Authorities and Providers of Education and Training to
+                Overseas Students 2018.</p>
+            <p>Information collected about you on this form and during your
+                enrolment can be provided, in certain
+                circumstances, to the Australian Government and designated
+                authorities. In other instances, information
+                collected on this form or during your Enrolment can be
+                disclosed without your consent where authorized
+                or required by law.”</p>
+            <p>
+                <label for="student_name">Student name:</label>
+                <input type="text" id="student_name" name="student_name" required>
+            </p>
+            <p>
+                <label for="student_signature">Student Signature</label>
+                <input type="file" id="student_signature" name="student_signature" accept="image/*" required>
+            </p>
+            <p>
+                <label for="student_date">Date:</label>
+                <input type="text" id="student_date" name="student_date" required>
+            </p>
+        </section>
+
+        <!--Application Checklist-->
+        <section>
+            <h1>Application Checklist</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>
+                        <input type="checkbox" id="completed-all-sections" name="completed_all_sections"
+                            value="Completed all sections of this application">
+                        <label for="completed-all-sections">Completed all
+                            sections of this application</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="relevant-employment-documentation"
+                            name="relevant_employment_documentation" value="Attached relevant employment documentation">
+                        <label for="relevant-employment-documentation">Attached
+                            relevant employment
+                            documentation</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="copies-of-visa" name="copies_of_visa"
+                            value="Attached certified true copies of your VISA">
+                        <label for="copies-of-visa">Attached certified true
+                            copies of your VISA</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="other-relevant-documentation" name="other_relevant_documentation"
+                            value="Attached any other relevant documentation">
+                        <label for="other-relevant-documentation">Attached
+                            any other relevant documentation</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="copies-of-passport" name="copies_of_passport"
+                            value=" Attached certified true copies of your Passport">
+                        <label for="copies-of-passport">Attached certified
+                            true copies of your Passport</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="signed-the-declaration" name="signed_the_declaration"
+                            value="Read and signed the declaration">
+                        <label for="signed-the-declaration">Read and signed
+                            the declaration</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="copies-of-qualification" name="copies_of_qualification"
+                            value="Attached certified true copies of your qualifications">
+                        <label for="copies-of-qualification">Attached
+                            certified true copies of your
+                            qualifications</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="copies-of-english-proficiency" name="copies_of_english_proficiency"
+                            value="Attached certified true copies of your English Proficiency">
+                        <label for="copies-of-english-proficiency">Attached
+                            certified true copies of your English
+                            Proficiency</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="copies-current-ohsc" name="copies_current_ohsc"
+                            value="Copy of your current OHSC">
+                        <label for="copies-current-ohsc">Copy of your
+                            current OHSC</label>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!--Education Agent Details (If applicable)-->
+        <section>
+            <h1>Education Agent Details (If applicable)</h1>
+            <table id="customers" border="1">
+                <tr>
+                    <td>
+                        Agency Name
+                    </td>
+                    <td>
+                        <input type="text" id="education-agency-name" name="education-agency-name" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Agent Name
+                    </td>
+                    <td>
+                        <input type="text" id="education-agent-name" name="education-agent-name" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td>
+                        <input type="text" id="education-agent-mail" name="education-agent-mail" required>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!--Agent declaration:-->
+        <section>
+            <p>Agent declaration: (Please click all the circles to indicate
+                your agreement)<br>
+                As the Education Agent of this student seeking to apply for
+                enrolment at IBM (VIC), I confirm:</p>
+            <p>
+                <input type="checkbox" style="width: 10px;" id="comply_one" name="comply_one" value="comply_one"
+                    required>
+                <label for="comply_one">That I comply with the standards of
+                    the ESOS framework (including the Education
+                    Services for Overseas Students (ESOS) Act 2000 and the
+                    National Code of Practice for Providers of
+                    Education and Training to Overseas Students
+                    2018.</label>
+                <br>
+                <input type="checkbox" id="comply_two" name="comply_two" value="comply_two" required>
+                <label for="comply_two">That the information contained
+                    within this application form is accurate, and
+                    that the supporting documentation including, but not
+                    limited to the "certified copy" of the
+                    applicant's academic record is correct and has not been
+                    altered in any way.</label>
+                <br>
+                <input type="checkbox" id="comply_three" name="comply_three" value="comply_three" required>
+                <label for="comply_three">That I understand Institute of
+                    Business and Management (Victoria) expects
+                    Education Agents to act ethically in dealings with the
+                    Overseas Students and their families.</label>
+                <br>
+                <input type="checkbox" id="comply_four" name="comply_four" value="comply_four" required>
+                <label for="comply_four">That any Enrolment Fees paid to me
+                    by the student to support this application
+                    will be immediately transferred to Institute of Business
+                    and Management (Victoria) so that Institute
+                    can uphold its commitment to ESOS legislation with
+                    regards to enhancing the refund policy where
+                    appropriate.</label>
+                <br>
+                <input type="checkbox" id="comply_five" name="comply_five" value="comply_five" required>
+                <label for="comply_five">That I understand Institute of
+                    Business and Management (Victoria) expects
+                    Education Agents to ensure that each student applying
+                    for entry to Institute of Business and
+                    Management (Victoria) is familiar with the information
+                    contained in: The Application Form, Overseas
+                    Student Pre-Enrolment Information and the student
+                    Handbook.</label>
+                <br>
+                <input type="checkbox" id="comply_six" name="comply_six" value="comply_six" required>
+                <label for="comply_six">I confirm the student has signed
+                    this application form.</label>
+                <br>
+                <input type="checkbox" id="comply_seven" name="comply_seven" value="comply_seven" required>
+                <label for="comply_seven">I have provided the student’s
+                    personal email address and residential address,
+                    as disclosed to me by the student</label>
+            </p>
+        </section>
+
+        <!--Agent Signature/ Stamp-->
+        <section>
+            <p>
+                <label for="agent_stamp_file">Agent Signature/ Stamp</label>
+                <input type="file" id="agent_stamp_file" name="agent_stamp_file" accept="image/*" required>
+            </p>
+            <p>
+                <label for="agent_stamp_file">If there is any file you want
+                    to
+                    upload for queries(IELTS/ VISA/PASSPORT) etc
+                </label>
+                <input type="file" id="query_files" name="query_files" accept="image/*" required>
+            </p>
+            <p>
+                <!-- <input type="submit"> -->
+                <button id="myButton" type="submit">Submit</button>
+            </p>
+
+        </section>
+        <!-- <div class="mt-2">
+                
+              </div> -->
+    </form>
+        <div id="loader" class="loader" style="text-align: center;">
+            <div class="myProgress" style="width: 30%;border:1px solid black;margin: auto;">
+                <div class="myBar" id="myBar" style="width: 1%;background-color: #3498db;height: 20px; color:white;">
+                    0%
+                </div>
+            </div>
+            <div class="pl">
+                <div class="pl__text" style="color:red">
+                    <h3>Thank you for submitting the form</h3>
+                </div>
+                <div style="color:blueviolet">
+                    <h3>Please wait for a while…</h3>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#loader').hide()
+                $('#previous_qual_list1').hide()
+            $('#previous_qual_list2').hide()
+            $('#previous_qual_list3').hide()
+            $('#previous_qual_list4').hide()
+            $('#yes').click(function(){
+                $('#previous_qual_list1').show()
+            $('#previous_qual_list2').show()
+            $('#previous_qual_list3').show()
+            $('#previous_qual_list4').show()
+            })
+               $('#no').click(function(){
+                $('#previous_qual_list1').hide()
+            $('#previous_qual_list2').hide()
+            $('#previous_qual_list3').hide()
+            $('#previous_qual_list4').hide()
+            }) 
+            
+        })
+        </script>
+    <script type="text/javascript">
+        // function save() {
+        
+        $('#form').submit(function (e) {
+            e.preventDefault()
+            const maxSize = 40000;
+            
+            var formData = new FormData()
+            // $('#form').on('submit', function(event) {
+            //   event.preventDefault();
+            if ($('input[name="course"]').is(':checked') == true) {
+                var course = document.querySelector('input[name="course"]:checked').value
+            } else {
+                alert('Please select a course')
+            }
+            if ($('input[name="airport-pickup"]').is(':checked') == true) {
+                var airport_pickup = document.querySelector('input[name="airport-pickup"]:checked').value
+            } else {
+                alert('Please select if you need an airport pickup (2nd question)')
+            }
+            // alert(airport_pickup)
+            if ($('input[name="title"]').is(':checked') == true) {
+                var title = document.querySelector('input[name="title"]:checked').value
+            } else {
+                alert('Please enter title (3rd question')
+            }
+            // alert(title)
+            if ($('input[name="gender"]').is(':checked') == true) {
+                var gender = document.querySelector('input[name="gender"]:checked').value
+            } else {
+                alert('Please select gender')
+            }
+            // alert(gender)
+            // alert($('#family-name').val())
+            if ($('#family-name').val().trim() != "") {
+                var family_name = $('#family-name').val()
+            } else {
+                alert('Please enter family name in Personal Details section')
+            }
+            // var family_name = $('#family-name').val()
+            // alert(family_name)
+            if ($('#given-name').val().trim() != "") {
+                var given_name = $('#given-name').val()
+            } else {
+                alert('Please enter given name in Personal Details section')
+            }
+            // alert(given_name)
+            if ($('#place-birth').val().trim() != "") {
+                var place_birth = $('#place-birth').val()
+            } else {
+                alert('Please enter place of birth in personal details section')
+            }
+            // alert(place_birth)
+            if ($('#date-birth').val().trim() != "") {
+                var date_of_birth = $('#date-birth').val()
+            } else {
+                alert('Please enter date of birth in personal details section')
+            }
+            // alert(date_of_birth)
+            if ($('#nationality').val().trim() != "") {
+                var nationality = $('#nationality').val()
+            } else {
+                alert('Please enter nationality in personal details section')
+            }
+            // alert(nationality)
+            if ($('#passportno').val().trim() != "") {
+                var passport = $('#passportno').val()
+            } else {
+                alert('Please enter passport number in personal details section')
+            }
+            // alert(passport)
+            // alert(passport)
+            if ($('#passport-expiry-date').val().trim() != "") {
+                var passport_expiry = $('#passport-expiry-date').val()
+            } else {
+                alert('Please enter passport expiry date in personal details section')
+            }
+            // alert(passport_expiry)
+            if ($('#visa-type').val().trim() != "") {
+                var visa_type = $('#visa-type').val()
+            } else {
+                alert('Please enter visa type in personal details section')
+            }
+            // alert(visa_type)
+            if ($('#visa-subclass').val().trim() != "") {
+                var visa_subclass = $('#visa-subclass').val()
+            } else {
+                alert('Please enter visa subclass in personal details section')
+            }
+            // alert(visa_subclass)
+            if ($('#visa-number').val().trim() != "") {
+                var visa_number = $('#visa-number').val()
+            } else {
+                alert('Please enter visa number in personal details section')
+            }
+            // alert(visa_number)
+            if ($('#visa-expiry-date').val().trim() != "") {
+                var visa_expiry = $('#visa-expiry-date').val()
+            } else {
+                alert('Please enter visa expiry date in personal details section')
+            }
+            // alert(visa_expiry)
+            var oshc_cover = $('#oshc-cover').val()
+            // alert(oshc_cover)
+            var oshc_cover_provider = ""
+            if (oshc_cover === "oshc-cover-yes") {
+                // alert()
+                oshc_cover_provider = $('#oshc-cover-provider').val()
+                formData.append('oshc_cover_provider', oshc_cover_provider)
+                // alert(oshc_cover_provider)
+            } else {
+                oshc_cover_provider_if_no = $('#oshc-cover-if-no').val()
+                // alert(oshc_cover_provider_if_no)
+                formData.append('oshc_cover_provider_if_no', oshc_cover_provider_if_no)
+            }
+            if ($('#oshc-cover-family-member-name').val().trim() != "") {
+                var oshc_cover_family_member_name = $('#oshc-cover-family-member-name').val()
+                // alert(oshc_cover_family_member_name)
+            } else {
+                alert('Enter family member name in overseas health cover')
+            }
+            if ($('#oshc-cover-date-birth').val().trim() != "") {
+                var oshc_cover_date_birth = $('#oshc-cover-date-birth').val()
+            } else {
+                alert('Enter date of birth in overseas health cover')
+            }
+
+            // alert(oshc_cover_date_birth)
+            if ($('#oshc-cover-gender').val().trim() != "") {
+                var overseas_gender = $('#oshc-cover-gender').val()
+            } else {
+                alert('Enter date of birth in overseas health cover')
+            }
+            // alert(overseas_gender)
+            var oshc_cover_study_australia = $('#oshc-cover-study-australia').val()
+            // alert(oshc_cover_study_australia) /// Yes or No ///
+
+            if (oshc_cover_study_australia == 'oshc-cover-study-australia-yes') {
+                var oshc_cover_name_institute = $('#oshc-cover-name-institute').val()
+                // alert(oshc_cover_name_institute)
+            } else {
+                var oshc_cover_name_institute = ""
+            }
+            var oshc_cover_transferring_education = $('#oshc-cover-transferring-education').val()
+            // alert(oshc_cover_transferring_education)
+            var usi_cover = $('#usi-cover').val()
+            // alert(usi_cover)
+            var usi_specify = ""
+            if (usi_cover == "usi-cover-yes") {
+                usi_specify = $('#usi-specify').val()
+                // alert(usi_specify)
+            }
+            if ($('#usi-staff-name').val().trim() != "") {
+                var usi_staff_name = $('#usi-staff-name').val()
+            } else {
+                alert('Please enter usi staff name under Unique Staff Identifier section')
+            }
+
+            // alert(usi_staff_name)
+            var usi_staff_signature_attach = ""
+            if ($('#usi_staff_signature')[0].files[0] != "") {
+                usi_staff_signature_attach = $('#usi_staff_signature')[0].files[0];
+            } else {
+                usi_staff_signature_attach = ""
+            }
+            // alert(usi_staff_signature_attach.name);
+            if ($('#usi-staff-date').val().trim() != "") {
+                var usi_staff_date = $('#usi-staff-date').val()
+            } else {
+                alert('Please enter date under Unique Staff Identifier section')
+            }
+            // alert(usi_staff_date)
+            /////// Residential address (Home Country) ////////
+            // alert(contact_home_address)
+            if ($('#contact-home-address').val().trim() != "") {
+                var contact_home_address = $('#contact-home-address').val()
+            } else {
+                alert('Please enter home address under contact details')
+            }
+            // alert(contact_home_country)
+            if ($('#contact-home-country').val().trim() != "") {
+                var contact_home_country = $('#contact-home-country').val()
+            } else {
+                alert('Please enter home country under contact details')
+            }
+            // alert(contact_home_phone)
+            var contact_home_phone = $('#contact-home-phone').val()
+            if ($('#contact-home-phone').val().trim() != "") {
+                var contact_home_phone = $('#contact-home-phone').val()
+            } else {
+                alert('Please enter phone under contact details')
+            }
+            // alert(contact_home_email)
+            if ($('#contact-home-email').val().trim() != "") {
+                var contact_home_email = $('#contact-home-email').val()
+            } else {
+                alert('Please enter email under contact details')
+            }
+            /////// Residential address (Home Country) ////////
+
+            /////// Residential address (Australia) ////////
+            var contact_australia_building = $('#contact-australia-building').val().trim();
+            if (contact_australia_building == "") {
+                alert('Please enter building in Australia contact details');
+            }
+
+            var contact_australia_flat = $('#contact-australia-flat').val().trim();
+            if (contact_australia_flat == "") {
+                alert('Please enter flat in Australia contact details');
+            }
+
+            var contact_australia_street_no = $('#contact-australia-street-no').val().trim();
+            if (contact_australia_street_no == "") {
+                alert('Please enter street number in Australia contact details');
+            }
+
+            var contact_australia_street_name = $('#contact-australia-street-name').val().trim();
+            if (contact_australia_street_name == "") {
+                alert('Please enter street name in Australia contact details');
+            }
+
+            var contact_australia_suburb = $('#contact-australia-suburb').val().trim();
+            if (contact_australia_suburb == "") {
+                alert('Please enter suburb in Australia contact details');
+            }
+
+            var contact_australia_state = $('#contact-australia-state').val().trim();
+            if (contact_australia_state == "") {
+                alert('Please enter state in Australia contact details');
+            }
+
+            var contact_australia_postcode = $('#contact-australia-postcode').val().trim();
+            if (contact_australia_postcode == "") {
+                alert('Please enter postcode in Australia contact details');
+            }
+
+            var contact_australia_mobile = $('#contact-australia-mobile').val().trim();
+            if (contact_australia_mobile == "") {
+                alert('Please enter mobile in Australia contact details');
+            }
+
+            var contact_australia_email = $('#contact-australia-email').val().trim();
+            if (contact_australia_email == "") {
+                alert('Please enter email in Australia contact details');
+            }
+
+            /// Postal Address //////
+            var postal_address_building = $('#postal-address-building').val().trim();
+            if (postal_address_building == "") {
+                alert('Please enter building in postal address details');
+            }
+
+            var postal_address_flat = $('#postal-address-flat').val().trim();
+            if (postal_address_flat == "") {
+                alert('Please enter flat in postal address details');
+            }
+
+            var postal_address_street_no = $('#postal-address-street-no').val().trim();
+            if (postal_address_street_no == "") {
+                alert('Please enter street number in postal address details');
+            }
+
+            var postal_address_street_name = $('#postal-address-street-name').val().trim();
+            if (postal_address_street_name == "") {
+                alert('Please enter street name in postal address details');
+            }
+
+            var postal_address_suburb = $('#postal-address-suburb').val().trim();
+            if (postal_address_suburb == "") {
+                alert('Please enter suburb in postal address details');
+            }
+
+            var postal_address_state = $('#postal-address-state').val().trim();
+            if (postal_address_state == "") {
+                alert('Please enter state in postal address details');
+            }
+
+            var postal_address_postcode = $('#postal-address-postcode').val().trim();
+            if (postal_address_postcode == "") {
+                alert('Please enter postcode in postal address details');
+            }
+
+            var postal_address_delivery_box = $('#postal-address-delivery-box').val().trim();
+            if (postal_address_delivery_box == "") {
+                alert('Please enter delivery box in postal address details');
+            }
+
+
+            if (document.querySelector('input[name="preferred-contact-method"]:checked')
+                .value != "") {
+                var preferred_contact_method = document.querySelector(
+                    'input[name="preferred-contact-method"]:checked')
+                    .value
+            } else {
+                alert("Please select your prefferred contact method")
+            }
+
+            // alert(preferred_contact_method)
+
+            ///// Emergency Contact in Australia or Home Country ////
+
+            var emergency_contact_name = $('#emergency-contact-name').val().trim();
+            if (emergency_contact_name == "") {
+                alert('Please enter emergency contact name');
+            }
+            // alert(emergency_contact_name)
+
+            var emergency_contact_phone = $('#emergency-contact-phone').val().trim();
+            if (emergency_contact_phone == "") {
+                alert('Please enter emergency contact phone');
+            }
+            // alert(emergency_contact_phone)
+
+            var emergency_contact_relationship = $('#emergency-contact-relationship').val().trim();
+            if (emergency_contact_relationship == "") {
+                alert('Please enter emergency contact relationship');
+            }
+            // alert(emergency_contact_relationship)
+
+            ///// English Language Proficiency //////////////
+            var english_is_required = ""
+            if ($('#english-not-required').is(":checked")) {
+                english_is_required = $("input[type='checkbox']").val();
+                // alert(english_is_required)
+            }
+            var assessment_type = ""
+            var english_score_achieved = ""
+            var english_score_date = ""
+            if (english_is_required !== "english-not-required") {
+                if ($('input[name="assessment_type"]').is(':checked') == true) {
+                    var assessment_type = document.querySelector('input[name="assessment_type"]:checked').value
+                } else {
+                    alert('Please enter assessment type under english language proficiency section')
+                }
+
+                var english_score_achieved = $('#english-score-achieved').val().trim();
+                if (english_score_achieved == "") {
+                    alert('Please enter the achieved English score');
+                }
+
+                var english_score_date = $('#english-score-date').val().trim();
+                if (english_score_date == "") {
+                    alert('Please enter the date of the English score');
+                }
+            }
+            // // alert(assessment_type);
+            // // alert(english_score_achieved);
+            // // alert(english_score_date)
+
+            // /// Previous Qualification Achieved ///////
+
+            var previous_qualification_yes_or_no = document.querySelector('input[name="yes-or-no"]:checked')
+                .value
+            // alert(previous_qualification_yes_or_no)
+
+            // let prev_qual_list = [];
+
+            var prev_qual_bachelors = "";
+            var prev_qual_degree = "";
+            var prev_qual_advanceOrdiploma = "";
+            var prev_qual_diploma = "";
+            var prev_qual_year_twelve = "";
+            var prev_qual_certification_four = "";
+            var prev_qual_certification_three = "";
+            var prev_qual_certification_two = "";
+            if (previous_qualification_yes_or_no == "yes") {
+                // alert($('input[name="prev_qual_degree"]').is(":checked"))
+                if($('input[name="prev_qual_bachelors"]').is(':checked')==true||$('input[name="prev_qual_degree"]').is(':checked')==true||$('input[name="prev_qual_advanceOrdiploma"]').is(':checked')==true||$('input[name="prev_qual_diploma"]').is(':checked')==true||$('input[name="prev_qual_year_twelve"]').is(':checked')==true||$('input[name="prev_qual_certification_four"]').is(':checked')==true||$('input[name="prev_qual_certification_three"]').is(':checked')==true||$('input[name="prev_qual_certification_two"]').is(':checked')==true){
+                    
+                }else{
+                    $.alert({
+              title: "Select atleast one!",
+              content: "Please select atleast one achieved previous qualification",})
+              return;
+                }
+                if ($('input[name="prev_qual_bachelors"]').is(':checked') == true) {
+                    prev_qual_bachelors = document.querySelector('input[name="prev_qual_bachelors"]:checked')
+                        .value
+                    //  alert(prev_qual_bachelors)
+                    formData.append('prev_qual_bachelors', prev_qual_bachelors)
+                    // alert(prev_qual_list)
+                }
+
+                if ($('input[name="prev_qual_degree"]').is(":checked") == true) {
+                    prev_qual_degree = document.querySelector("input[name=prev_qual_degree]:checked").value
+                    formData.append('prev_qual_degree', prev_qual_degree)
+                }
+
+                if ($('input[name="prev_qual_advanceOrdiploma"]').is(":checked") == true) {
+                    prev_qual_advanceOrdiploma = document.querySelector(
+                        "input[name=prev_qual_advanceOrdiploma]:checked").value
+                    formData.append('prev_qual_advanceOrdiploma', prev_qual_advanceOrdiploma)
+                }
+
+                if ($('input[name="prev_qual_diploma"]').is(":checked") == true) {
+                    prev_qual_diploma = document.querySelector("input[name=prev_qual_diploma]:checked").value
+                    formData.append('prev_qual_diploma', prev_qual_diploma)
+                }
+
+                if ($('input[name="prev_qual_year_twelve"]').is(":checked") == true) {
+                    prev_qual_year_twelve = document.querySelector("input[name=prev_qual_year_twelve]:checked")
+                        .value
+                    formData.append('prev_qual_year_twelve', prev_qual_year_twelve)
+                }
+
+                if ($('input[name="prev_qual_certification_four"]').is(':checked') == true) {
+                    prev_qual_certification_four = document.querySelector(
+                        "input[name=prev_qual_certification_four]:checked").value
+                    formData.append('prev_qual_certification_four', prev_qual_certification_four)
+                }
+
+                if ($('input[name="prev_qual_certification_three"]').is(':checked') == true) {
+                    prev_qual_certification_three = document.querySelector(
+                        "input[name=prev_qual_certification_three]:checked").value
+                    formData.append('prev_qual_certification_three', prev_qual_certification_three)
+                }
+
+                if ($('input[name="prev_qual_certification_two"]').is(':checked') == true) {
+                    prev_qual_certification_two = document.querySelector(
+                        "input[name=prev_qual_certification_two]:checked").value
+                    formData.append('prev_qual_certification_two', prev_qual_certification_two)
+                }
+                if ($('input[name="assessedOrNot"]').is(':checked') == true) {
+                    var assessedOrNot = document.querySelector('input[name="assessedOrNot"]:checked').value
+                    formData.append('assessedOrNot', assessedOrNot)
+                } else {
+                    alert('Please select if your qualification been skill assessed or not')
+                }
+            }
+
+
+            // alert(assessedOrNot)
+
+            // Most recent or current Qualifications///////
+
+            var most_recent_qualification = $('#most-recent-qualification').val().trim();
+            if (most_recent_qualification == "") {
+                alert('Please enter the most recent qualification');
+            }
+            // alert(most_recent_qualification)
+
+            var most_recent_school = $('#most-recent-school').val().trim();
+            if (most_recent_school == "") {
+                alert('Please enter the most recent school');
+            }
+            // alert(most_recent_school)
+
+            var most_recent_country = $('#most-recent-country').val().trim();
+            if (most_recent_country == "") {
+                alert('Please enter the most recent country');
+            }
+            // alert(most_recent_country)
+
+            var most_recent_year_complete = $('#most-recent-year-complete').val().trim();
+            if (most_recent_year_complete == "") {
+                alert('Please enter the most recent year of completion');
+            }
+            // alert(most_recent_year_complete)
+
+
+            var rpl_transfer = document.querySelector('input[name="rpl-transfer"]:checked').value
+            // alert(rpl_transfer)
+            var student_important_files = ""
+            if (rpl_transfer == "yes") {
+                if ($('#student_important_files')[0].files[0] != "") {
+                    student_important_files = $('#student_important_files')[0].files[0];
+                }
+
+                // alert(student_important_files.name);
+            }
+
+            ///////// Reason for Study ///////////////
+            // let reasons_of_undertaking_this_course = []; 
+            $("input:checkbox[name=reasonsOfTakingCourse]:checked").each(function () {
+                reasons_of_undertaking_this_course.push($(this).val());
+            });
+            // alert(reasons_of_undertaking_this_course)
+            var reasonsOfTakingCourse_get_a_job = ""
+            var reasonsOfTakingCourse_better_promotion = ""
+            var reasonsOfTakingCourse_part_time_job = ""
+            var reasonsOfTakingCourse_career_in_new_field = ""
+            var reasonsOfTakingCourse_start_a_business = ""
+            var reasonsOfTakingCourse_gain_new_skill = ""
+            var reasonsOfTakingCourse_gain_knowledge = ""
+            var reasonsOfTakingCourse_personal_interest = ""
+            if ($('input[name="reasonsOfTakingCourse_get_a_job"]').is(':checked') == true) {
+                reasonsOfTakingCourse_get_a_job = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_get_a_job"]:checked').value
+                formData.append('reasonsOfTakingCourse_get_a_job', reasonsOfTakingCourse_get_a_job)
+            }
+            if ($('input[name="reasonsOfTakingCourse_better_promotion"]').is(':checked') == true) {
+                reasonsOfTakingCourse_better_promotion = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_better_promotion"]:checked').value
+                formData.append('reasonsOfTakingCourse_better_promotion',
+                    reasonsOfTakingCourse_better_promotion)
+            }
+            if ($('input[name="reasonsOfTakingCourse_part_time_job"]').is(':checked') == true) {
+                reasonsOfTakingCourse_part_time_job = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_part_time_job"]:checked').value
+                formData.append('reasonsOfTakingCourse_part_time_job', reasonsOfTakingCourse_part_time_job)
+            }
+            if ($('input[name="reasonsOfTakingCourse_career_in_new_field"]').is(':checked') == true) {
+                reasonsOfTakingCourse_career_in_new_field = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_career_in_new_field"]:checked').value
+                formData.append('reasonsOfTakingCourse_career_in_new_field',
+                    reasonsOfTakingCourse_career_in_new_field)
+            }
+            if ($('input[name="reasonsOfTakingCourse_start_a_business"]').is(':checked') == true) {
+                reasonsOfTakingCourse_start_a_business = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_start_a_business"]:checked').value
+                formData.append('reasonsOfTakingCourse_start_a_business',
+                    reasonsOfTakingCourse_start_a_business)
+            }
+            if ($('input[name="reasonsOfTakingCourse_gain_new_skill"]').is(':checked') == true) {
+                reasonsOfTakingCourse_gain_new_skill = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_gain_new_skill"]:checked').value
+                formData.append('reasonsOfTakingCourse_gain_new_skill', reasonsOfTakingCourse_gain_new_skill)
+            }
+            if ($('input[name="reasonsOfTakingCourse_gain_knowledge"]').is(':checked') == true) {
+                reasonsOfTakingCourse_gain_knowledge = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_gain_knowledge"]:checked').value
+                formData.append('reasonsOfTakingCourse_gain_knowledge', reasonsOfTakingCourse_gain_knowledge)
+            }
+            if ($('input[name="reasonsOfTakingCourse_personal_interest"]').is(':checked') == true) {
+                reasonsOfTakingCourse_personal_interest = document.querySelector(
+                    'input[name="reasonsOfTakingCourse_personal_interest"]:checked').value
+                formData.append('reasonsOfTakingCourse_personal_interest',
+                    reasonsOfTakingCourse_personal_interest)
+            }
+
+            if ($('#other-reason-to-study').val().trim() != "") {
+                var other_reason_to_study = $('#other-reason-to-study').val()
+                formData.append('other_reason_to_study', other_reason_to_study)
+            }
+            // special needs ////////
+            var special_support = document.querySelector('input[name="special-support"]:checked').value
+            // alert(special_support)
+
+            var disability = document.querySelector('input[name="disability"]:checked').value
+            // alert(disability)
+
+            var other_special = document.querySelector('input[name="other-special"]:checked').value
+            // alert(other_special)
+
+            var employment = document.querySelector('input[name="employment"]:checked').value
+            // alert(employment)
+
+            // Use of personal information //////
+
+            var student_name = $('#student_name').val().trim();
+            if (student_name == "") {
+                alert('Please enter the student name');
+            }
+            // alert(student_name)
+
+            var student_date = $('#student_date').val().trim();
+            if (student_date == "") {
+                alert('Please enter the student date');
+            }
+            // alert(student_date)
+
+            ///// Application checklist //////
+
+            var completed_all_sections = ""
+            var relevant_employment_documentation = ""
+            var copies_of_visa = ""
+            var other_relevant_documentation = ""
+            var copies_of_passport = ""
+            var signed_the_declaration = ""
+            var copies_of_qualification = ""
+            var copies_of_english_proficiency = ""
+            var copies_current_ohsc = ""
+            let checklist = [];
+            $("input:checkbox[name=application_checklist]:checked").each(function () {
+                checklist.push($(this).val());
+            });
+
+            if ($('input[name="completed_all_sections"]').is(':checked') == true) {
+                completed_all_sections = document.querySelector('input[name="completed_all_sections"]:checked')
+                    .value
+                formData.append('completed_all_sections', completed_all_sections)
+            }
+            if ($('input[name="relevant_employment_documentation"]').is(':checked') == true) {
+                relevant_employment_documentation = document.querySelector(
+                    'input[name="relevant_employment_documentation"]:checked').value
+                // alert(relevant_employment_documentation)
+                formData.append('relevant_employment_documentation', relevant_employment_documentation)
+            }
+            if ($('input[name="copies_of_visa"]').is(':checked') == true) {
+                copies_of_visa = document.querySelector('input[name="copies_of_visa"]:checked').value
+                formData.append('copies_of_visa', copies_of_visa)
+            }
+            if ($('input[name="other_relevant_documentation"]').is(':checked') == true) {
+                other_relevant_documentation = document.querySelector(
+                    'input[name="other_relevant_documentation"]:checked').value
+                formData.append('other_relevant_documentation', other_relevant_documentation)
+            }
+            if ($('input[name="copies_of_passport"]').is(':checked') == true) {
+                copies_of_passport = document.querySelector('input[name="copies_of_passport"]:checked').value
+                formData.append('copies_of_passport', copies_of_passport)
+            }
+            if ($('input[name="signed_the_declaration"]').is(':checked') == true) {
+                signed_the_declaration = document.querySelector('input[name="signed_the_declaration"]:checked')
+                    .value
+                formData.append('signed_the_declaration', signed_the_declaration)
+            }
+            if ($('input[name="copies_of_qualification"]').is(':checked') == true) {
+                copies_of_qualification = document.querySelector(
+                    'input[name="copies_of_qualification"]:checked').value
+                // alert(copies_of_qualification)
+                formData.append('copies_of_qualification', copies_of_qualification)
+            }
+            if ($('input[name="copies_of_english_proficiency"]').is(':checked') == true) {
+                copies_of_english_proficiency = document.querySelector(
+                    'input[name="copies_of_english_proficiency"]:checked').value
+                formData.append('copies_of_english_proficiency', copies_of_english_proficiency)
+            }
+            if ($('input[name="copies_current_ohsc"]').is(':checked') == true) {
+                copies_current_ohsc = document.querySelector('input[name="copies_current_ohsc"]:checked').value
+                formData.append('copies_current_ohsc', copies_current_ohsc)
+            }
+            // alert(completed_all_sections)
+
+            /// Education Agent Details (If applicable) /////
+
+            var education_agency_name = $('#education-agency-name').val().trim();
+            if (education_agency_name == "") {
+                alert('Please enter the education agency name');
+            }
+            // alert(education_agency_name)
+
+            var education_agent_name = $('#education-agent-name').val().trim();
+            if (education_agent_name == "") {
+                alert('Please enter the education agent name');
+            }
+            // alert(education_agent_name)
+
+            var education_agent_mail = $('#education-agent-mail').val().trim();
+            if (education_agent_mail == "") {
+                alert('Please enter the education agent mail');
+            }
+            // alert(education_agent_mail)
+
+            // Agent declaration
+            var comply_one = document.querySelector('input[name="comply_one"]:checked').value
+            // alert(comply_one)
+            var comply_two = document.querySelector('input[name="comply_two"]:checked').value
+            // alert(comply_two)
+            var comply_three = document.querySelector('input[name="comply_three"]:checked').value
+            // alert(comply_three)
+            var comply_four = document.querySelector('input[name="comply_four"]:checked').value
+            // alert(comply_four)
+            var comply_five = document.querySelector('input[name="comply_five"]:checked').value
+            // alert(comply_five)
+            var comply_six = document.querySelector('input[name="comply_six"]:checked').value
+            // alert(comply_six)
+
+            var comply_seven = document.querySelector('input[name="comply_seven"]:checked').value
+            // alert(comply_seven)
+
+            //// Agent Signature/ Stamp /////
+            var fileSelect = $('#agent_stamp_file')[0].files[0];
+            var student_signature = $('#student_signature')[0].files[0];
+            // alert(fileSelect);
+            // alert(fileSelect.name);
+
+            //// Query files /////
+            var query_files = $('#query_files')[0].files[0];
+            // alert(query_files.name);
+            // var form = document.getElementById('myForm');
+
+            formData.append('course', course)
+            formData.append('agent_stamp_file', $('#agent_stamp_file')[0].files[0])
+            formData.append('airport_pickup', airport_pickup)
+            formData.append('title', title)
+            formData.append('gender', gender)
+            formData.append('family_name', family_name)
+            formData.append('given_name', given_name)
+            formData.append('place_birth', place_birth)
+            formData.append('date_of_birth', date_of_birth)
+            formData.append('nationality', nationality)
+            formData.append('passport', passport)
+            formData.append('passport_expiry', passport_expiry)
+            formData.append('visa_type', visa_type)
+            formData.append('visa_subclass', visa_subclass)
+            formData.append('visa_number', visa_number)
+            formData.append('visa_expiry', visa_expiry)
+            formData.append('oshc_cover', oshc_cover)
+
+            formData.append('oshc_cover_family_member_name', oshc_cover_family_member_name)
+            formData.append('oshc_cover_date_birth', oshc_cover_date_birth)
+            formData.append('overseas_gender', overseas_gender)
+            formData.append('oshc_cover_study_australia', oshc_cover_study_australia)
+            formData.append('oshc_cover_name_institute', oshc_cover_name_institute)
+            formData.append('oshc_cover_transferring_education', oshc_cover_transferring_education)
+            formData.append('usi_cover', usi_cover)
+            formData.append('usi_specify', usi_specify)
+            formData.append('usi_staff_name', usi_staff_name)
+            formData.append('usi_staff_date', usi_staff_date)
+            formData.append('contact_home_address', contact_home_address)
+            formData.append('contact_home_country', contact_home_country)
+            formData.append('contact_home_phone', contact_home_phone)
+            formData.append('contact_home_email', contact_home_email)
+            formData.append('contact_australia_building', contact_australia_building)
+            formData.append('contact_australia_flat', contact_australia_flat)
+            formData.append('contact_australia_street_no', contact_australia_street_no)
+            formData.append('contact_australia_street_name', contact_australia_street_name)
+            formData.append('contact_australia_suburb', contact_australia_suburb)
+            formData.append('contact_australia_state', contact_australia_state)
+            formData.append('contact_australia_postcode', contact_australia_postcode)
+            formData.append('contact_australia_mobile', contact_australia_mobile)
+            formData.append('contact_australia_email', contact_australia_email)
+            formData.append('postal_address_building', postal_address_building)
+            formData.append('postal_address_flat', postal_address_flat)
+            formData.append('postal_address_street_no', postal_address_street_no)
+            formData.append('postal_address_street_name', postal_address_street_name)
+            formData.append('postal_address_suburb', postal_address_suburb)
+            formData.append('postal_address_state', postal_address_state)
+            formData.append('postal_address_postcode', postal_address_postcode)
+            formData.append('postal_address_delivery_box', postal_address_delivery_box)
+            formData.append('preferred_contact_method', preferred_contact_method)
+            formData.append('emergency_contact_name', emergency_contact_name)
+            formData.append('emergency_contact_phone', emergency_contact_phone)
+            formData.append('emergency_contact_relationship', emergency_contact_relationship)
+            formData.append('english_is_required', english_is_required)
+            formData.append('assessment_type', assessment_type)
+            formData.append('english_score_achieved', english_score_achieved)
+            formData.append('english_score_date', english_score_date)
+            formData.append('previous_qualification_yes_or_no', previous_qualification_yes_or_no)
+
+            formData.append('most_recent_qualification', most_recent_qualification)
+            formData.append('most_recent_school', most_recent_school)
+            formData.append('most_recent_country', most_recent_country)
+            formData.append('most_recent_year_complete', most_recent_year_complete)
+            formData.append('rpl_transfer', rpl_transfer)
+            formData.append('student_important_files', student_important_files)
+            // formData.append('reasons_of_undertaking_this_course',reasons_of_undertaking_this_course)
+            formData.append('special_support', special_support)
+            formData.append('disability', disability)
+            formData.append('other_special', other_special)
+            formData.append('employment', employment)
+            formData.append('student_name', student_name)
+            formData.append('student_date', student_date)
+            formData.append('checklist', checklist)
+            formData.append('education_agency_name', education_agency_name)
+            formData.append('education_agent_name', education_agent_name)
+            formData.append('education_agent_mail', education_agent_mail)
+            formData.append('comply_one', comply_one)
+            formData.append('comply_two', comply_two)
+            formData.append('comply_three', comply_three)
+            formData.append('comply_four', comply_four)
+            formData.append('comply_five', comply_five)
+            formData.append('comply_six', comply_six)
+            formData.append('comply_seven', comply_seven)
+            formData.append('usi_staff_signature_attach', usi_staff_signature_attach)
+            formData.append('student_signature', student_signature)
+            formData.append('agent_stamp_file', agent_stamp_file)
+            formData.append('query_files', query_files)
+            var button = document.getElementById("myButton");
+            // button.setAttribute("disabled", "");
+
+            // if (fileSelect.size < maxSize && student_signature.size<maxSize && query_files.size<maxSize && usi_staff_signature_attach.size<maxSize) {
+            // if(rpl_transfer && rpl_transfer.size<maxSize){
+            
+            if (fileSelect.size < maxSize) {
+                if (student_signature.size < maxSize) {
+                    if (query_files.size < maxSize) {
+                        if (rpl_transfer == 'yes' && student_important_files.size < maxSize || rpl_transfer == "no") {
+                            button.setAttribute("disabled", "");
+                            // var elem = document.getElementById("myBar");
+                            var elem = $('#myBar')
+                            var width=1;
+                            
+                            function simulateProgress() {
+                                if(width>=100){
+                                    clearInterval(progressInterval);
+                                }else{
+                                    width++;
+                                    elem.css('width',width+'%')
+                                    elem.text(width+'%')
+                                    
+                            }
+                            }
+                            var progressInterval = setInterval(simulateProgress, 190);
+                                   $('#loader').show();
+                                   $('#form').hide();
+                            $.ajax({
+                                type: "POST",
+                                url: "https://backend.ibm.vic.edu.au/api/pdf-merge",
+                                data: formData,
+                                processData: false, // Important: Prevent jQuery from processing the data
+                                contentType: false, // Important: Prevent jQuery from setting the content type
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content') // Include the CSRF token
+                                },
+                                contentType: false,
+                                success: function (data) {
+                                    clearInterval(progressInterval);
+                progressBar.css('width', '100%');
+                                    
+                                    
+                                }
+                            }).then((res) => {
+                                $('#loader').hide();
+                                $.alert({
+              title: "Success!",
+              content: "Submitted successfully",
+              buttons: {
+                ok: {
+                  text: "OK",
+                  action: function () {
+                    window.location.href = "https://ibm.quadque.tech/"; // Replace with your desired URL
+                  },
+                },
+              },
+            });
+                                
+                                
+                            })
+                        } else {
+                            $('#loader').hide();
+                            
+                            alert('Rpl Transfer file must be less than 3Mb.')
+                        }
+                    } else {
+                        button.setAttribute("enabled", "");
+                        $('#loader').hide();
+                        
+                        alert('Query files must be less than 3Mb.')
+                    }
+                } else {
+                    $('#loader').hide();
+                    
+                    alert('Student Signature must be less than 3Mb')
+                }
+            } else {
+                $('#loader').hide();
+                
+                alert('Agent Signature/Stamp must be less than 3Mb')
+            }
+        })
+    </script>
+</body>
